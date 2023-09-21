@@ -1,4 +1,4 @@
-import { handleErrorResponse } from '../../utils/errorResponse.js';
+import { controllerHandlerError } from '../../utils/handlerError.js';
 import { createNewPost } from './post.service.js';
 
 export const createPost = async (req, res) => {
@@ -8,6 +8,6 @@ export const createPost = async (req, res) => {
     const newPost = await createNewPost(title, body);
     res.status(200).json(newPost);
   } catch (error) {
-    handleErrorResponse(res, error);
+    controllerHandlerError(res, error);
   }
 };

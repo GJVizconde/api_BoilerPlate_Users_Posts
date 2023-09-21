@@ -2,7 +2,7 @@ import { User } from '../../db.js';
 import axios from 'axios';
 import cleanArray from '../../utils/cleanArray.js';
 import { Op } from 'sequelize';
-import { serviceError } from '../../utils/errorResponse.js';
+import { serviceHandlerError } from '../../utils/handlerError.js';
 import isUUIDv4 from '../../utils/uuidValidate.js';
 
 // GET ALL USERS
@@ -18,7 +18,7 @@ export const getAllUsers = async () => {
 
     return [...usersBd, ...apiUsers];
   } catch (error) {
-    serviceError(error, 'An error occurred while retrieving all users.');
+    serviceHandlerError(error, 'An error occurred while retrieving all users.');
   }
 };
 
@@ -41,7 +41,7 @@ export const getUserByName = async (name) => {
 
     return [...usersByName, ...filteredApi];
   } catch (error) {
-    serviceError(error, 'Ocurred an error');
+    serviceHandlerError(error, 'Ocurred an error');
   }
 };
 
@@ -50,7 +50,7 @@ export const createNewUser = async (name, email, phone) => {
   try {
     return await User.create({ name, email, phone });
   } catch (error) {
-    serviceError(error, 'Ocurred an error');
+    serviceHandlerError(error, 'Ocurred an error');
   }
 };
 
@@ -80,7 +80,7 @@ export const updateDataUser = async (id, name, email, phone) => {
       message: 'Data user was successfully updated',
     };
   } catch (error) {
-    serviceError(error, 'There was an error updating the user data.');
+    serviceHandlerError(error, 'There was an error updating the user data.');
   }
 };
 
@@ -114,7 +114,7 @@ export const searchUserById = async (id, source) => {
 
     return user;
   } catch (error) {
-    serviceError(error, 'An error ocurred while searching user by id');
+    serviceHandlerError(error, 'An error ocurred while searching user by id');
   }
 };
 
@@ -150,7 +150,7 @@ export const userUpdated = async (id, updateFields, source) => {
 
     return updatedUser;
   } catch (error) {
-    serviceError(error, 'An error occurred while updating user data');
+    serviceHandlerError(error, 'An error occurred while updating user data');
   }
 };
 
@@ -176,6 +176,6 @@ export const userDeleted = async (id, source) => {
       message: 'User successfully deleted.',
     };
   } catch (error) {
-    serviceError(error, 'An error occurred while deleting the user');
+    serviceHandlerError(error, 'An error occurred while deleting the user');
   }
 };

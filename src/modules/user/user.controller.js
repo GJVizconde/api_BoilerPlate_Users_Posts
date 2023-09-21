@@ -1,4 +1,4 @@
-import { handleErrorResponse } from '../../utils/errorResponse.js';
+import { controllerHandlerError } from '../../utils/handlerError.js';
 import {
   createNewUser,
   getAllUsers,
@@ -18,7 +18,7 @@ export const getUsers = async (req, res) => {
     const results = name ? await getUserByName(name) : await getAllUsers();
     res.status(200).json(results);
   } catch (error) {
-    handleErrorResponse(res, error);
+    controllerHandlerError(res, error);
   }
 };
 
@@ -31,7 +31,7 @@ export const createUser = async (req, res) => {
 
     res.status(200).json(newUser);
   } catch (error) {
-    handleErrorResponse(res, error);
+    controllerHandlerError(res, error);
   }
 };
 
@@ -46,7 +46,7 @@ export const updateUser = async (req, res) => {
 
     res.status(200).json(user);
   } catch (error) {
-    handleErrorResponse(res, error);
+    controllerHandlerError(res, error);
   }
 };
 
@@ -61,7 +61,7 @@ export const getUserById = async (req, res) => {
     const user = await searchUserById(id, source);
     res.status(200).json(user);
   } catch (error) {
-    handleErrorResponse(res, error);
+    controllerHandlerError(res, error);
   }
 };
 
@@ -77,7 +77,7 @@ export const partialUpdateUser = async (req, res) => {
     const user = await userUpdated(id, updateFields, source);
     res.status(200).json(user);
   } catch (error) {
-    handleErrorResponse(res, error);
+    controllerHandlerError(res, error);
   }
 };
 
@@ -92,6 +92,6 @@ export const deleteUser = async (req, res) => {
     const response = await userDeleted(id, source);
     res.status(200).json(response);
   } catch (error) {
-    handleErrorResponse(res, error);
+    controllerHandlerError(res, error);
   }
 };

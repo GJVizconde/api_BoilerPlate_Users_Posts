@@ -1,5 +1,5 @@
 // Handler Error Response
-export const handleErrorResponse = (res, error) => {
+export const controllerHandlerError = (res, error) => {
   if (error instanceof Error) {
     return res.status(400).json({ error: error.message });
   } else {
@@ -8,7 +8,7 @@ export const handleErrorResponse = (res, error) => {
 };
 
 // Service Error
-export const serviceError = (error, defaultMessage) => {
+export const serviceHandlerError = (error, defaultMessage) => {
   if (error instanceof Error) {
     throw error;
   } else {
