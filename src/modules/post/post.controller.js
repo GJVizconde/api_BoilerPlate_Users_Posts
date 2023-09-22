@@ -5,6 +5,7 @@ import {
   postPartialUpdated,
   postToDelete,
   searchPostByContent,
+  searchPostById,
   updatePostData,
 } from './post.service.js';
 
@@ -30,6 +31,20 @@ export const getPosts = async (req, res) => {
       : await getAllPosts();
 
     res.status(200).json(response);
+  } catch (error) {
+    controllerHandlerError(res, error);
+  }
+};
+
+// GET POST BY ID
+
+export const getPostById = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const post = await searchPostById(id);
+
+    res.status(200).json(post);
   } catch (error) {
     controllerHandlerError(res, error);
   }

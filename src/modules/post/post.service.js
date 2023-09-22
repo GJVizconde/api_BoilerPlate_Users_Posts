@@ -48,6 +48,20 @@ export const searchPostByContent = async (searchInput) => {
   }
 };
 
+// GET POST BY ID
+
+export const searchPostById = async (id) => {
+  try {
+    const post = await Post.findByPk(id);
+
+    if (!post) throw new Error('Post not found');
+
+    return post;
+  } catch (error) {
+    serviceHandlerError(error, 'An error ocurred during post searching by id');
+  }
+};
+
 // UPDATE POST DATA
 
 export const updatePostData = async (id, title, body) => {
