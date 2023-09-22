@@ -130,8 +130,6 @@ export const userUpdated = async (id, updateFields, source) => {
       throw new Error('Invalid user id format');
     }
 
-    console.log(updateFields);
-
     const user = await User.findByPk(id);
 
     if (!user) throw new Error('User not found');
@@ -139,8 +137,6 @@ export const userUpdated = async (id, updateFields, source) => {
     const rowsUpdated = await User.update(updateFields, {
       where: { id: user.id },
     });
-
-    console.log(rowsUpdated);
 
     if (rowsUpdated === 0) {
       throw new Error('User not updated');
@@ -163,6 +159,8 @@ export const userDeleted = async (id, source) => {
     const user = await User.findByPk(id);
 
     if (!user) throw new Error('User not found');
+
+    // DELETE USER
 
     const deletedUser = await User.destroy({
       where: {

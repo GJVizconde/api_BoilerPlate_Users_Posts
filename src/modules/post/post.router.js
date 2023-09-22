@@ -1,8 +1,18 @@
 import { Router } from 'express';
-import { createPost } from './post.controller.js';
+import {
+  createPost,
+  deletePost,
+  getPosts,
+  partialUpdatePost,
+  updatePost,
+} from './post.controller.js';
 
 const postRouter = Router();
 
-postRouter.get('/', createPost);
+postRouter.post('/', createPost);
+postRouter.get('/', getPosts);
+postRouter.put('/:id', updatePost);
+postRouter.patch('/:id', partialUpdatePost);
+postRouter.delete('/:id', deletePost);
 
 export default postRouter;
