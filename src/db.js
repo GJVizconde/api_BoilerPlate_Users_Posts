@@ -15,9 +15,6 @@ PostModel(sequelize);
 
 const { User, Post } = sequelize.models;
 
-// Team.hasMany(Player);
-// Player.belongsTo(Team);
-
 User.hasMany(Post);
 Post.belongsTo(User);
 

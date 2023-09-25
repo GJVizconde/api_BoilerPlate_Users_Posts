@@ -1,4 +1,4 @@
-import { User } from '../../db.js';
+import { User, Post } from '../../db.js';
 import axios from 'axios';
 import cleanArray from '../../utils/cleanArray.js';
 import { Op } from 'sequelize';
@@ -106,7 +106,12 @@ export const searchUserById = async (id, source) => {
       throw new Error('User not found');
     }
 
-    const user = await User.findByPk(id);
+    const user = await User.findByPk(id, {
+      include: {
+        model: Post,
+        attributes: ['id', 'title', 'body'],
+      },
+    });
 
     if (!user) {
       throw new Error('User not found');

@@ -7,10 +7,11 @@ import {
   partialUpdateUser,
   updateUser,
 } from './user.controller.js';
+import { validateCreateUser } from '../../middlewares/index.js';
 
 const userRouter = Router();
 
-userRouter.post('/', createUser);
+userRouter.post('/', validateCreateUser, createUser);
 
 userRouter.get('/', getUsers);
 
