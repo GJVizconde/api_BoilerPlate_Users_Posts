@@ -10,10 +10,10 @@ import {
 } from './post.service.js';
 
 export const createPost = async (req, res) => {
-  const { title, body } = req.body;
+  const { title, body, userId } = req.body;
 
   try {
-    const newPost = await createNewPost(title, body);
+    const newPost = await createNewPost(title, body, userId);
     res.status(201).json(newPost);
   } catch (error) {
     controllerHandlerError(res, error);

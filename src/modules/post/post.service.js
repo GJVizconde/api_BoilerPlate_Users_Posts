@@ -3,9 +3,11 @@ import { serviceHandlerError } from '../../utils/handlerError.js';
 
 // CREATE NEW POST
 
-export const createNewPost = async (title, body) => {
+export const createNewPost = async (title, body, userId) => {
   try {
-    return await Post.create({ title, body });
+    const newPost = await Post.create({ title, body });
+    await newPost.setUser(userId);
+    return newPost;
   } catch (error) {
     serviceHandlerError(error, 'An error ocurred while creating a new post');
   }
